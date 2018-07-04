@@ -10,7 +10,7 @@ Why react-awesome-clock?
 ## Getting Started
 
 ```js
-<ReactClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
+<ReactAwesomeClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
 ```
 
 ### Installation
@@ -40,15 +40,15 @@ A `<ReactAwesomeClock>` element renders the clock.
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ReactAwesomeClock } from 'react-awesome-clock';
+import ReactAwesomeClock from 'react-awesome-clock';
 
 class App extends React.Component {
   render() {
     return (
       <div>
       <ReactAwesomeClock color={"lightGrey"} size={70}/>
-      <ReactClock day={true} color={"lightGrey"} size={70} startDate={moment([2017, 6, 1])}/>
-      <ReactClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
+      <ReactAwesomeClock day={true} color={"lightGrey"} size={70} startDate={moment([2017, 6, 1])}/>
+      <ReactAwesomeClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
       </div>
     )
   }
