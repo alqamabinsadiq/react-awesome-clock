@@ -1,0 +1,45 @@
+{
+  "name": "react-awesome-clock",
+  "version": "0.0.1",
+  "description": "A clock component for React",
+  "main": "build/index.js",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-clock",
+    "react-awesome-clock",
+    "react-native-clock",
+    "react clock"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alqamabinsadiq/react-awesome-clock"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "moment": "^2.18.1"
+  },
+  "dependencies": {
+    "moment": "^2.18.1",
+    "react": "^16.0.0",
+    "webpack": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "author": {
+    "name": "Alqama Bin Sadiq",
+    "email": "alqamabinsadiq@gmail.com"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1"
+  }
+}

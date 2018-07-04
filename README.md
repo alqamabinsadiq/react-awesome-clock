@@ -1,0 +1,106 @@
+# REACT AWESOME CLOCK [BETA]
+
+react-awesome-clock is a react component which gives you an awesome component of clock.
+It's a beta version.
+
+Why react-awesome-clock?
+
+1. **Single Component for every type of clock** - It provides you a generic clock component, which allows you to design it dynamically as you want. Youu can aply whatever style you want. You can also use it as a timer by just providing the starting date using momentJS.
+
+## Getting Started
+
+```js
+<ReactClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
+```
+
+### Installation
+
+```sh
+npm install --save react-awesome-clock
+```
+
+### Exports
+Here's how to use it:
+
+```js
+// ES6
+import { ReactAwesomeClock } from 'react-awesome-clock'; // React Awesome Clock
+
+// CommonJS
+let AwesomeClock = require('react-awesome-clock');
+let ReactAwesomeClock = AwesomeClock.ReactAwesomeClock;
+```
+
+## `<ReactAwesomeClock>`
+A `<ReactAwesomeClock>` element renders the clock.
+
+### ReactAwesomeClock Usage
+
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ReactAwesomeClock } from 'react-awesome-clock';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+      <ReactAwesomeClock color={"lightGrey"} size={70}/>
+      <ReactClock day={true} color={"lightGrey"} size={70} startDate={moment([2017, 6, 1])}/>
+      <ReactClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.body);
+```
+#### `<ReactAwesomeClock>` Props:
+```js
+
+//
+// Props:
+//
+{
+// Sets the color of clock.
+color: string, // color={"lightGrey"}
+
+// Sets the size of a clock.
+size: number, // size={70}
+
+// If set true then The clock will also show the day in clock.
+day: boolean, // day={true}
+/*
+Sometimes we want to show the number of days passed since we start working or
+launched a project. So this prop is helpful in such cases.
+*/
+// If the day prop is set to true then this prop will work.
+// You can pass the object of date which contains the start date to this prop and it will // calculate the number of days and display in days section of clock.
+// It is strongly recommended to use the moment object
+startDate: object, // startDate={moment([2017, 6, 1])}
+
+// Just pass the css shadow property, if you want a shadow on your clock.
+clockShadow: string, // clockShadow="0 0 10px grey" 
+
+
+// sets the style of clock digits, you can pass any font type you want to this prop.
+clockDigitStyle: string // clockDigitStyle="aerial"
+
+```
+
+### Contributing
+
+- Fork the project
+- Install the dependencies: `$ npm install`
+- Run the project: `$ npm start`
+- Make changes.
+- Add appropriate tests
+- `$ npm test`
+- If tests don't pass, make them pass.
+- Update README with appropriate docs.
+- Commit and make Pull Request.
+
+### License
+
+MIT
