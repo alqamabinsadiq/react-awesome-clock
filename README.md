@@ -24,11 +24,10 @@ Here's how to use it:
 
 ```js
 // ES6
-import { ReactAwesomeClock } from 'react-awesome-clock'; // React Awesome Clock
+import ReactAwesomeClock from 'react-awesome-clock'; // React Awesome Clock
 
 // CommonJS
-let AwesomeClock = require('react-awesome-clock');
-let ReactAwesomeClock = AwesomeClock.ReactAwesomeClock;
+let ReactAwesomeClock = require('react-awesome-clock');
 ```
 
 ## `<ReactAwesomeClock>`
