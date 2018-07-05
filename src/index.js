@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 // Default Styles
 const styles = {
@@ -111,5 +112,14 @@ class ReactClock extends Component {
     );
   }
 }
+
+ReactClock.propTypes = {
+  startDate: PropTypes.object,
+  color: PropTypes.string,
+  size: PropTypes.number,
+  clockShadow: PropTypes.string,
+  day: PropTypes.bool,
+  clockDigitStyle: PropTypes.string
+};
 
 export default ReactClock;

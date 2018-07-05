@@ -18,10 +18,12 @@
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.0.0",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "prop-types": "^15.6.2"
   },
   "dependencies": {
     "moment": "^2.18.1",
+    "prop-types": "^15.6.2",
     "react": "^16.0.0",
     "webpack": "^2.6.1"
   },
