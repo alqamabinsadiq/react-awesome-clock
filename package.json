@@ -1,6 +1,6 @@
 {
   "name": "react-awesome-clock",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "description": "A clock component for React",
   "main": "build/index.js",
   "keywords": [

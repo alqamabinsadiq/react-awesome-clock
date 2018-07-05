@@ -1,11 +1,12 @@
 # REACT AWESOME CLOCK [BETA]
 
-react-awesome-clock is a react component which gives you an awesome component of clock.
-It's a beta version.
+react-awesome-clock is a react component which can be used in any one of the following ways:
+- A Normal Clock 
+- Days Count from a certain date (StartDate as mentioned in docs).
 
 Why react-awesome-clock?
 
-1. **Single Component for every type of clock** - It provides you a generic clock component, which allows you to design it dynamically as you want. Youu can aply whatever style you want. You can also use it as a timer by just providing the starting date using momentJS.
+1. **Single Component for every type of clock** - It provides you a generic clock component, which allows you to design it dynamically as you want. You can aply whatever style you want. You can also use it as a timer by just providing the starting date using momentJS.
 
 ## Getting Started
 
