@@ -1,4 +1,4 @@
-# REACT AWESOME CLOCK [BETA]
+# REACT AWESOME CLOCK
 
 react-awesome-clock is a react component which can be used in any one of the following ways:
 - A Normal Clock 
