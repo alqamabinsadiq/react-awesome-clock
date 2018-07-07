@@ -8,6 +8,11 @@ Why react-awesome-clock?
 
 1. **Single Component for every type of clock** - It provides you a generic clock component, which allows you to design it dynamically as you want. You can aply whatever style you want. You can also use it as a timer by just providing the starting date using momentJS.
 
+## DEMO
+
+### Simple Clock Component
+![Simple Clock Component Gif](https://github.com/alqamabinsadiq/react-awesome-clock/blob/master/src/images/clock.gif)
+
 ## Getting Started
 
 ```js
@@ -102,5 +107,7 @@ clockDigitStyle: string // clockDigitStyle="aerial"
 - Commit and make Pull Request.
 
 ### License
+This source code is licensed under the MIT license.
 
-MIT
+---
+Made with ♥ by ALQAMA BIN SADIQ [github](https://github.com/alqamabinsadiq/react-awesome-clock)
