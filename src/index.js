@@ -47,9 +47,9 @@ class ReactClock extends Component {
 
   // clock tick.
   tick() {
-    let timestamp = this.state.dateTimestamp + 1;
+    // let timestamp = Date.now();
     this.setState({
-      dateTimestamp: timestamp,
+      dateTimestamp: Date.now(),
     });
   }
 
