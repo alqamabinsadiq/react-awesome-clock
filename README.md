@@ -13,11 +13,10 @@ Why react-awesome-clock?
 ### Simple Clock Component
 ![Simple Clock Component Gif](https://github.com/alqamabinsadiq/react-awesome-clock/blob/master/src/images/clock.gif)
 
-## Getting Started
+### Clock Component With Days Count
+![Clock Component With Days Count Gif](https://github.com/alqamabinsadiq/react-awesome-clock/blob/master/src/images/clockWithDays.gif)
 
-```js
-<ReactAwesomeClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
-```
+## Getting Started
 
 ### Installation
 
@@ -37,7 +36,7 @@ let ReactAwesomeClock = require('react-awesome-clock');
 ```
 
 ## `<ReactAwesomeClock>`
-A `<ReactAwesomeClock>` element renders the clock.
+A `<ReactAwesomeClock>` element renders the clock. You can also add an additional days count to this component by just passing the startDate as props.
 
 ### ReactAwesomeClock Usage
 
@@ -51,9 +50,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
+      // Simple Clock Component
       <ReactAwesomeClock color={"lightGrey"} size={70}/>
-      <ReactAwesomeClock day={true} color={"lightGrey"} size={70} startDate={moment([2017, 6, 1])}/>
       <ReactAwesomeClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
+
+      // Clock Component With Days Count
+      <ReactAwesomeClock day={true} color={"lightGrey"} size={70} startDate={moment([2017, 6, 1])}/>
       </div>
     )
   }
