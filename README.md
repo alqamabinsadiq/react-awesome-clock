@@ -96,7 +96,7 @@ clockDigitStyle: string // clockDigitStyle="aerial"
 
 ```
 
-### Contributing
+## Contributing
 
 - Fork the project
 - Install the dependencies: `$ npm install`
@@ -108,7 +108,7 @@ clockDigitStyle: string // clockDigitStyle="aerial"
 - Update README with appropriate docs.
 - Commit and make Pull Request.
 
-### License
+## License
 This source code is licensed under the MIT license.
 
 ---
