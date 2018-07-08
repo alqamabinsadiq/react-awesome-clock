@@ -80,7 +80,7 @@ class ReactClock extends Component {
   }
 
   render() {
-    const { startDate, color, size, clockShadow, clockDigitStyle } = this.props;
+    const { startDate, color, size, clockShadow, clockDigitStyle, clockSeparator } = this.props;
     let day = this.calculateDays(startDate);
 
     return (
@@ -93,17 +93,17 @@ class ReactClock extends Component {
           fontFamily: clockDigitStyle,
         }}>
         {startDate ? this.renderDay(day) : this.renderDay(moment().format("DD"), "DAY")}
-        {this.props.day ? <div>.</div> : null}
+        {this.props.day ? <div>{clockSeparator ? clockSeparator : '.'}</div> : null}
         <div style={{ ...styles.clockHeaderStyle }}>
           <div style={{ ...styles.clockSubHeader }}> HOURS </div>
           <div>{moment().format("HH")}</div>
         </div>
-        <div>.</div>
+        <div>{clockSeparator ? clockSeparator : '.'}</div>
         <div style={{ ...styles.clockHeaderStyle }}>
           <div style={{ ...styles.clockSubHeader }}> MINUTES </div>
           <div>{moment().format("mm")}</div>
         </div>
-        <div>.</div>
+        <div>{clockSeparator ? clockSeparator : '.'}</div>
         <div style={{ ...styles.clockHeaderStyle }}>
           <div style={{ ...styles.clockSubHeader }}> SECONDS </div>
           <div>{moment().format("ss")}</div>
@@ -113,13 +113,15 @@ class ReactClock extends Component {
   }
 }
 
+// PropTypes
 ReactClock.propTypes = {
   startDate: PropTypes.object,
   color: PropTypes.string,
   size: PropTypes.number,
   clockShadow: PropTypes.string,
   day: PropTypes.bool,
-  clockDigitStyle: PropTypes.string
+  clockDigitStyle: PropTypes.string,
+  clockSeparator: PropTypes.string
 };
 
 export default ReactClock;
