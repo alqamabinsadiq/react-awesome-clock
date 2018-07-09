@@ -55,7 +55,7 @@ class App extends React.Component {
       <ReactAwesomeClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
 
       // Clock Component With Days Count
-      <ReactAwesomeClock day={true} color={"lightGrey"} size={70} startDate={moment([2017, 6, 1])}/>
+      <ReactAwesomeClock day={true} color={"lightGrey"} size={70} startDate="2018-09-06" />
       </div>
     )
   }
@@ -78,14 +78,14 @@ size: number, // size={70}
 
 // If set true then The clock will also show the day in clock.
 day: boolean, // day={true}
+
 /*
-Sometimes we want to show the number of days passed since we start working or
-launched a project. So this prop is helpful in such cases.
+ * Sometimes we want to show the number of days passed since we start working or
+ * launched a project. So this prop is helpful in such cases.
+ * You can pass the object of date which contains the start date to this prop and it will 
+ * calculate the number of days and display in days section of clock.
 */
-// If the day prop is set to true then this prop will work.
-// You can pass the object of date which contains the start date to this prop and it will // calculate the number of days and display in days section of clock.
-// It is strongly recommended to use the moment object
-startDate: object, // startDate={moment([2017, 6, 1])}
+startDate: string, // startDate="2017-06-01"
 
 // Just pass the css shadow property, if you want a shadow on your clock.
 clockShadow: string, // clockShadow="0 0 10px grey" 

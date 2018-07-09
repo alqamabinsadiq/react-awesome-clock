@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-// Default Styles
-const styles = {
+const defaultStyles = {
   clockStyle: {
     height: '8rem',
     margin: 0,
@@ -16,6 +15,7 @@ const styles = {
     fontFamily: 'sans-serif',
     letterSpacing: '5px',
     textShadow: '0 0 10px #fff',
+    textTransform: 'uppercase'
   },
   clockHeaderStyle: {
     margin: '13px',
@@ -32,96 +32,99 @@ const styles = {
 };
 
 class ReactClock extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dateTimestamp: Date.now()
-    };
-    this.tick = this.tick.bind(this);
-    this.renderDay = this._renderDay.bind(this);
-  }
 
+  static propTypes = {
+    startDate: PropTypes.string,
+    color: PropTypes.string,
+    size: PropTypes.number,
+    clockShadow: PropTypes.string,
+    day: PropTypes.bool,
+    clockDigitStyle: PropTypes.string,
+    clockSeparator: PropTypes.string
+  };
+
+  state = {
+    dateTimestamp: Date.now()
+  };
+  
   componentDidMount() {
     this.interval = setInterval(this.tick, 1000);
   }
 
-  // clock tick.
-  tick() {
-    // let timestamp = Date.now();
-    this.setState({
-      dateTimestamp: Date.now(),
-    });
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
-  // renders the day section of clock if the user set the day prop as true.
-  _renderDay(day, heading = "DAYS") {
-    if (this.props.day) {
-      return (
-
-        <div style={{ ...styles.clockHeaderStyle }}>
-          <div style={{ ...styles.clockSubHeader }}> {heading} </div>
-          <div>{day}</div>
-        </div>
-
-      );
-    }
-    else
-      return null;
+  tick = () => {
+    this.setState({ dateTimestamp: Date.now() });
   }
 
-  // Calculating no. of days.
-  calculateDays(startDate) {
-    let date = new Date();
-    let curr_date = date.getDate();
-    let curr_year = date.getFullYear();
-    let curr_month = date.getMonth();
-    let currentDate = moment([curr_year, curr_month + 1, curr_date]);
-    return currentDate.diff(startDate, 'days');
+  calculateNumberOfDaysLeft = startDate => {
+    return moment().diff(startDate, 'days');
+  }
+  
+  static Day = ({ daysLeft, startDate, isDayEnabled }) => {
+    return <div>
+        {
+          isDayEnabled ?
+            <div style={{ ...defaultStyles.clockHeaderStyle }}>
+              <div style={{ ...defaultStyles.clockSubHeader }}> {startDate ? 'DAYS' : 'DAY'} </div>
+              <div>{ startDate ? daysLeft : moment().format('DD') }</div>
+            </div> :
+            ''
+        }
+      </div>;
+  }
+
+  static Seperator = ({ clockSeparator, shouldShow = true }) => {
+    return <span>{shouldShow ? (clockSeparator ? clockSeparator : '.') : '' }</span>;
+  }
+
+  static Hour = () => {
+    return <div style={{ ...defaultStyles.clockHeaderStyle }}>
+      <div style={{ ...defaultStyles.clockSubHeader }}> hours </div>
+      <div>{moment().format('HH')}</div>
+    </div>;
+  }
+
+  static Minutes = () => {
+    return <div style={{ ...defaultStyles.clockHeaderStyle }}>
+      <div style={{ ...defaultStyles.clockSubHeader }}> minutes </div>
+      <div>{moment().format('mm')}</div>
+    </div>
+  }
+
+  static Seconds = () => {
+    return <div style={{ ...defaultStyles.clockHeaderStyle }}>
+      <div style={{ ...defaultStyles.clockSubHeader }}> seconds </div>
+      <div>{moment().format('ss')}</div>
+    </div>
   }
 
   render() {
-    const { startDate, color, size, clockShadow, clockDigitStyle, clockSeparator } = this.props;
-    let day = this.calculateDays(startDate);
-
+    // TODO refactor color, size, clockShadow, clockDigitStyle into a style prop so any CSS style object can be passed
+    const { startDate, day, color, size, clockShadow, clockDigitStyle, clockSeparator } = this.props;
+    const daysLeft = this.calculateNumberOfDaysLeft(startDate);
+    const isDayEnabled = day === undefined ? false : day;
     return (
       <div
         style={{
-          ...styles.clockStyle,
+          ...defaultStyles.clockStyle,
           color: color,
           fontSize: size,
           textShadow: clockShadow,
           fontFamily: clockDigitStyle,
         }}>
-        {startDate ? this.renderDay(day) : this.renderDay(moment().format("DD"), "DAY")}
-        {this.props.day ? <div>{clockSeparator ? clockSeparator : '.'}</div> : null}
-        <div style={{ ...styles.clockHeaderStyle }}>
-          <div style={{ ...styles.clockSubHeader }}> HOURS </div>
-          <div>{moment().format("HH")}</div>
-        </div>
-        <div>{clockSeparator ? clockSeparator : '.'}</div>
-        <div style={{ ...styles.clockHeaderStyle }}>
-          <div style={{ ...styles.clockSubHeader }}> MINUTES </div>
-          <div>{moment().format("mm")}</div>
-        </div>
-        <div>{clockSeparator ? clockSeparator : '.'}</div>
-        <div style={{ ...styles.clockHeaderStyle }}>
-          <div style={{ ...styles.clockSubHeader }}> SECONDS </div>
-          <div>{moment().format("ss")}</div>
-        </div>
+        <ReactClock.Day daysLeft={daysLeft} startDate={startDate} isDayEnabled={isDayEnabled} />
+        <ReactClock.Seperator clockSeparator={clockSeparator} shouldShow={isDayEnabled} />
+        <ReactClock.Hour />
+        <ReactClock.Seperator clockSeparator={clockSeparator} />
+        <ReactClock.Minutes />
+        <ReactClock.Seperator clockSeparator={clockSeparator} />
+        <ReactClock.Seconds />
       </div>
     );
   }
 }
-
-// PropTypes
-ReactClock.propTypes = {
-  startDate: PropTypes.object,
-  color: PropTypes.string,
-  size: PropTypes.number,
-  clockShadow: PropTypes.string,
-  day: PropTypes.bool,
-  clockDigitStyle: PropTypes.string,
-  clockSeparator: PropTypes.string
-};
 
 export default ReactClock;

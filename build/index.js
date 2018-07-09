@@ -16685,8 +16685,7 @@ module.exports = require("react");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _jsxFileName = '/Users/mars/dev/playground/react-awesome-clock/src/index.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -16704,14 +16703,15 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// Default Styles
-var styles = {
+var defaultStyles = {
   clockStyle: {
     height: '8rem',
     margin: 0,
@@ -16723,7 +16723,8 @@ var styles = {
     fontSize: '61px',
     fontFamily: 'sans-serif',
     letterSpacing: '5px',
-    textShadow: '0 0 10px #fff'
+    textShadow: '0 0 10px #fff',
+    textTransform: 'uppercase'
   },
   clockHeaderStyle: {
     margin: '13px',
@@ -16742,17 +16743,24 @@ var styles = {
 var ReactClock = function (_Component) {
   _inherits(ReactClock, _Component);
 
-  function ReactClock(props) {
+  function ReactClock() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, ReactClock);
 
-    var _this = _possibleConstructorReturn(this, (ReactClock.__proto__ || Object.getPrototypeOf(ReactClock)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ReactClock.__proto__ || Object.getPrototypeOf(ReactClock)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       dateTimestamp: Date.now()
-    };
-    _this.tick = _this.tick.bind(_this);
-    _this.renderDay = _this._renderDay.bind(_this);
-    return _this;
+    }, _this.tick = function () {
+      _this.setState({ dateTimestamp: Date.now() });
+    }, _this.calculateNumberOfDaysLeft = function (startDate) {
+      return (0, _moment2.default)().diff(startDate, 'days');
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(ReactClock, [{
@@ -16760,136 +16768,85 @@ var ReactClock = function (_Component) {
     value: function componentDidMount() {
       this.interval = setInterval(this.tick, 1000);
     }
-
-    // clock tick.
-
   }, {
-    key: 'tick',
-    value: function tick() {
-      var timestamp = this.state.dateTimestamp + 1;
-      this.setState({
-        dateTimestamp: timestamp
-      });
-    }
-
-    // renders the day section of clock if the user set the day prop as true.
-
-  }, {
-    key: '_renderDay',
-    value: function _renderDay(day) {
-      var heading = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "DAYS";
-
-      if (this.props.day) {
-        return _react2.default.createElement(
-          'div',
-          { style: _extends({}, styles.clockHeaderStyle) },
-          _react2.default.createElement(
-            'div',
-            { style: _extends({}, styles.clockSubHeader) },
-            ' ',
-            heading,
-            ' '
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            day
-          )
-        );
-      } else return null;
-    }
-
-    // Calculating no. of days.
-
-  }, {
-    key: 'calculateDays',
-    value: function calculateDays(startDate) {
-      var date = new Date();
-      var curr_date = date.getDate();
-      var curr_year = date.getFullYear();
-      var curr_month = date.getMonth();
-      var currentDate = (0, _moment2.default)([curr_year, curr_month + 1, curr_date]);
-      return currentDate.diff(startDate, 'days');
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.interval);
     }
   }, {
     key: 'render',
     value: function render() {
+      // TODO refactor color, size, clockShadow, clockDigitStyle into a style prop so any CSS style object can be passed
       var _props = this.props,
           startDate = _props.startDate,
+          day = _props.day,
           color = _props.color,
           size = _props.size,
           clockShadow = _props.clockShadow,
-          clockDigitStyle = _props.clockDigitStyle;
+          clockDigitStyle = _props.clockDigitStyle,
+          clockSeparator = _props.clockSeparator;
 
-      var day = this.calculateDays(startDate);
-
+      var daysLeft = this.calculateNumberOfDaysLeft(startDate);
+      var isDayEnabled = day === undefined ? false : day;
       return _react2.default.createElement(
         'div',
-        {
-          style: _extends({}, styles.clockStyle, {
+        _defineProperty({
+          style: Object.assign({}, defaultStyles.clockStyle, {
             color: color,
             fontSize: size,
             textShadow: clockShadow,
             fontFamily: clockDigitStyle
-          }) },
-        startDate ? this.renderDay(day) : this.renderDay((0, _moment2.default)().format("DD"), "DAY"),
-        this.props.day ? _react2.default.createElement(
-          'div',
-          null,
-          '.'
-        ) : null,
-        _react2.default.createElement(
-          'div',
-          { style: _extends({}, styles.clockHeaderStyle) },
-          _react2.default.createElement(
-            'div',
-            { style: _extends({}, styles.clockSubHeader) },
-            ' HOURS '
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            (0, _moment2.default)().format("HH")
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          '.'
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: _extends({}, styles.clockHeaderStyle) },
-          _react2.default.createElement(
-            'div',
-            { style: _extends({}, styles.clockSubHeader) },
-            ' MINUTES '
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            (0, _moment2.default)().format("mm")
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          '.'
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: _extends({}, styles.clockHeaderStyle) },
-          _react2.default.createElement(
-            'div',
-            { style: _extends({}, styles.clockSubHeader) },
-            ' SECONDS '
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            (0, _moment2.default)().format("ss")
-          )
-        )
+          }), __source: {
+            fileName: _jsxFileName,
+            lineNumber: 100
+          },
+          __self: this
+        }, '__self', this),
+        _react2.default.createElement(ReactClock.Day, _defineProperty({ daysLeft: daysLeft, startDate: startDate, isDayEnabled: isDayEnabled, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 108
+          },
+          __self: this
+        }, '__self', this)),
+        _react2.default.createElement(ReactClock.Seperator, _defineProperty({ clockSeparator: clockSeparator, shouldShow: isDayEnabled, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 109
+          },
+          __self: this
+        }, '__self', this)),
+        _react2.default.createElement(ReactClock.Hour, _defineProperty({
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 110
+          },
+          __self: this
+        }, '__self', this)),
+        _react2.default.createElement(ReactClock.Seperator, _defineProperty({ clockSeparator: clockSeparator, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 111
+          },
+          __self: this
+        }, '__self', this)),
+        _react2.default.createElement(ReactClock.Minutes, _defineProperty({
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 112
+          },
+          __self: this
+        }, '__self', this)),
+        _react2.default.createElement(ReactClock.Seperator, _defineProperty({ clockSeparator: clockSeparator, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 113
+          },
+          __self: this
+        }, '__self', this)),
+        _react2.default.createElement(ReactClock.Seconds, _defineProperty({
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 114
+          },
+          __self: this
+        }, '__self', this))
       );
     }
   }]);
@@ -16897,13 +16854,180 @@ var ReactClock = function (_Component) {
   return ReactClock;
 }(_react.Component);
 
+ReactClock.Day = function (_ref2) {
+  var daysLeft = _ref2.daysLeft,
+      startDate = _ref2.startDate,
+      isDayEnabled = _ref2.isDayEnabled;
+
+  return _react2.default.createElement(
+    'div',
+    _defineProperty({
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 57
+      },
+      __self: undefined
+    }, '__self', undefined),
+    isDayEnabled ? _react2.default.createElement(
+      'div',
+      _defineProperty({ style: Object.assign({}, defaultStyles.clockHeaderStyle), __source: {
+          fileName: _jsxFileName,
+          lineNumber: 60
+        },
+        __self: undefined
+      }, '__self', undefined),
+      _react2.default.createElement(
+        'div',
+        _defineProperty({ style: Object.assign({}, defaultStyles.clockSubHeader), __source: {
+            fileName: _jsxFileName,
+            lineNumber: 61
+          },
+          __self: undefined
+        }, '__self', undefined),
+        ' ',
+        startDate ? 'DAYS' : 'DAY',
+        ' '
+      ),
+      _react2.default.createElement(
+        'div',
+        _defineProperty({
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 62
+          },
+          __self: undefined
+        }, '__self', undefined),
+        startDate ? daysLeft : (0, _moment2.default)().format('DD')
+      )
+    ) : ''
+  );
+};
+
+ReactClock.Seperator = function (_ref3) {
+  var clockSeparator = _ref3.clockSeparator,
+      _ref3$shouldShow = _ref3.shouldShow,
+      shouldShow = _ref3$shouldShow === undefined ? true : _ref3$shouldShow;
+
+  return _react2.default.createElement(
+    'span',
+    _defineProperty({
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 70
+      },
+      __self: undefined
+    }, '__self', undefined),
+    shouldShow ? clockSeparator ? clockSeparator : '.' : ''
+  );
+};
+
+ReactClock.Hour = function () {
+  return _react2.default.createElement(
+    'div',
+    _defineProperty({ style: Object.assign({}, defaultStyles.clockHeaderStyle), __source: {
+        fileName: _jsxFileName,
+        lineNumber: 74
+      },
+      __self: undefined
+    }, '__self', undefined),
+    _react2.default.createElement(
+      'div',
+      _defineProperty({ style: Object.assign({}, defaultStyles.clockSubHeader), __source: {
+          fileName: _jsxFileName,
+          lineNumber: 75
+        },
+        __self: undefined
+      }, '__self', undefined),
+      ' hours '
+    ),
+    _react2.default.createElement(
+      'div',
+      _defineProperty({
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 76
+        },
+        __self: undefined
+      }, '__self', undefined),
+      (0, _moment2.default)().format('HH')
+    )
+  );
+};
+
+ReactClock.Minutes = function () {
+  return _react2.default.createElement(
+    'div',
+    _defineProperty({ style: Object.assign({}, defaultStyles.clockHeaderStyle), __source: {
+        fileName: _jsxFileName,
+        lineNumber: 81
+      },
+      __self: undefined
+    }, '__self', undefined),
+    _react2.default.createElement(
+      'div',
+      _defineProperty({ style: Object.assign({}, defaultStyles.clockSubHeader), __source: {
+          fileName: _jsxFileName,
+          lineNumber: 82
+        },
+        __self: undefined
+      }, '__self', undefined),
+      ' minutes '
+    ),
+    _react2.default.createElement(
+      'div',
+      _defineProperty({
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 83
+        },
+        __self: undefined
+      }, '__self', undefined),
+      (0, _moment2.default)().format('mm')
+    )
+  );
+};
+
+ReactClock.Seconds = function () {
+  return _react2.default.createElement(
+    'div',
+    _defineProperty({ style: Object.assign({}, defaultStyles.clockHeaderStyle), __source: {
+        fileName: _jsxFileName,
+        lineNumber: 88
+      },
+      __self: undefined
+    }, '__self', undefined),
+    _react2.default.createElement(
+      'div',
+      _defineProperty({ style: Object.assign({}, defaultStyles.clockSubHeader), __source: {
+          fileName: _jsxFileName,
+          lineNumber: 89
+        },
+        __self: undefined
+      }, '__self', undefined),
+      ' seconds '
+    ),
+    _react2.default.createElement(
+      'div',
+      _defineProperty({
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 90
+        },
+        __self: undefined
+      }, '__self', undefined),
+      (0, _moment2.default)().format('ss')
+    )
+  );
+};
+
 ReactClock.propTypes = {
-  startDate: _propTypes2.default.object,
+  startDate: _propTypes2.default.string,
   color: _propTypes2.default.string,
   size: _propTypes2.default.number,
   clockShadow: _propTypes2.default.string,
   day: _propTypes2.default.bool,
-  clockDigitStyle: _propTypes2.default.string
+  clockDigitStyle: _propTypes2.default.string,
+  clockSeparator: _propTypes2.default.string
 };
 
 exports.default = ReactClock;
