@@ -46,7 +46,7 @@ class ReactClock extends Component {
   state = {
     dateTimestamp: Date.now()
   };
-  
+
   componentDidMount() {
     this.interval = setInterval(this.tick, 1000);
   }
@@ -62,22 +62,25 @@ class ReactClock extends Component {
   calculateNumberOfDaysLeft = startDate => {
     return moment().diff(startDate, 'days');
   }
-  
+
+  // pad string with zero
+  pad = (str, max = 2) => str.length < max ? `0 ${str}` : str;
+
   static Day = ({ daysLeft, startDate, isDayEnabled }) => {
     return <div>
-        {
-          isDayEnabled ?
-            <div style={{ ...defaultStyles.clockHeaderStyle }}>
-              <div style={{ ...defaultStyles.clockSubHeader }}> {startDate ? 'DAYS' : 'DAY'} </div>
-              <div>{ startDate ? daysLeft : moment().format('DD') }</div>
-            </div> :
-            ''
-        }
-      </div>;
+      {
+        isDayEnabled ?
+          <div style={{ ...defaultStyles.clockHeaderStyle }}>
+            <div style={{ ...defaultStyles.clockSubHeader }}> {startDate ? 'DAYS' : 'DAY'} </div>
+            <div>{startDate ? daysLeft : moment().format('DD')}</div>
+          </div> :
+          ''
+      }
+    </div>;
   }
 
   static Seperator = ({ clockSeparator, shouldShow = true }) => {
-    return <span>{shouldShow ? (clockSeparator ? clockSeparator : '.') : '' }</span>;
+    return <span>{shouldShow ? (clockSeparator ? clockSeparator : '.') : ''}</span>;
   }
 
   static Hour = () => {
@@ -104,7 +107,7 @@ class ReactClock extends Component {
   render() {
     // TODO refactor color, size, clockShadow, clockDigitStyle into a style prop so any CSS style object can be passed
     const { startDate, day, color, size, clockShadow, clockDigitStyle, clockSeparator } = this.props;
-    const daysLeft = this.calculateNumberOfDaysLeft(startDate);
+    const daysLeft = this.pad(this.calculateNumberOfDaysLeft(startDate).toString());
     const isDayEnabled = day === undefined ? false : day;
     return (
       <div

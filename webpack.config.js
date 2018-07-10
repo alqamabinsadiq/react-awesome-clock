@@ -1,3 +1,4 @@
+require('dotenv').config()
 var path = require('path');
 module.exports = {
   entry: './src/index.js',
@@ -15,7 +16,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env','react-app']
+            presets: ['env', 'react-app']
           }
         }
       }
