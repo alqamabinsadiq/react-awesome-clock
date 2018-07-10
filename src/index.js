@@ -105,18 +105,14 @@ class ReactClock extends Component {
   }
 
   render() {
-    // TODO refactor color, size, clockShadow, clockDigitStyle into a style prop so any CSS style object can be passed
-    const { startDate, day, color, size, clockShadow, clockDigitStyle, clockSeparator } = this.props;
+    const { startDate, day, style, clockSeparator } = this.props;
     const daysLeft = this.pad(this.calculateNumberOfDaysLeft(startDate).toString());
     const isDayEnabled = day === undefined ? false : day;
     return (
       <div
         style={{
           ...defaultStyles.clockStyle,
-          color: color,
-          fontSize: size,
-          textShadow: clockShadow,
-          fontFamily: clockDigitStyle,
+          ...style
         }}>
         <ReactClock.Day daysLeft={daysLeft} startDate={startDate} isDayEnabled={isDayEnabled} />
         <ReactClock.Seperator clockSeparator={clockSeparator} shouldShow={isDayEnabled} />

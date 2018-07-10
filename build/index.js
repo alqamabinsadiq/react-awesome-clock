@@ -16715,7 +16715,7 @@ var ReactClock = function (_Component) {
       return (0, _moment2.default)().diff(startDate, 'days');
     }, _this.pad = function (str) {
       var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-      return str.length < max ? "0" + str : str;
+      return str.length < max ? '0 ' + str : str;
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -16735,14 +16735,10 @@ var ReactClock = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      // TODO refactor color, size, clockShadow, clockDigitStyle into a style prop so any CSS style object can be passed
       var _props = this.props,
           startDate = _props.startDate,
           day = _props.day,
-          color = _props.color,
-          size = _props.size,
-          clockShadow = _props.clockShadow,
-          clockDigitStyle = _props.clockDigitStyle,
+          style = _props.style,
           clockSeparator = _props.clockSeparator;
 
       var daysLeft = this.pad(this.calculateNumberOfDaysLeft(startDate).toString());
@@ -16750,12 +16746,7 @@ var ReactClock = function (_Component) {
       return _react2.default.createElement(
         'div',
         {
-          style: Object.assign({}, defaultStyles.clockStyle, {
-            color: color,
-            fontSize: size,
-            textShadow: clockShadow,
-            fontFamily: clockDigitStyle
-          }) },
+          style: Object.assign({}, defaultStyles.clockStyle, style) },
         _react2.default.createElement(ReactClock.Day, { daysLeft: daysLeft, startDate: startDate, isDayEnabled: isDayEnabled }),
         _react2.default.createElement(ReactClock.Seperator, { clockSeparator: clockSeparator, shouldShow: isDayEnabled }),
         _react2.default.createElement(ReactClock.Hour, null),

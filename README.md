@@ -51,11 +51,11 @@ class App extends React.Component {
     return (
       <div>
       // Simple Clock Component
-      <ReactAwesomeClock color={"lightGrey"} size={70}/>
-      <ReactAwesomeClock day={true} color={"grey"} size={60} clockShadow="0 0 10px grey" clockDigitStyle="aerial" />
+      <ReactAwesomeClock style={{ color: "lightGrey", fontSize: 70 }} />
+      <ReactAwesomeClock day={true} style={{ color: "grey", fontSize: 60, textShadow: "0 0 10px grey", fontFamily: "aerial" }} />
 
       // Clock Component With Days Count
-      <ReactAwesomeClock day={true} color={"lightGrey"} size={70} startDate="2018-09-06" />
+      <ReactAwesomeClock day={true} style={{ color: "lightGrey", fontSize: 70 }} startDate="2018-09-06" />
       </div>
     )
   }
@@ -70,12 +70,6 @@ ReactDOM.render(<App/>, document.body);
 // Props:
 //
 {
-// Sets the color of clock.
-color: string, // color={"lightGrey"}
-
-// Sets the size of a clock.
-size: number, // size={70}
-
 // If set true then The clock will also show the day in clock.
 day: boolean, // day={true}
 
@@ -87,15 +81,11 @@ day: boolean, // day={true}
 */
 startDate: string, // startDate="2017-06-01"
 
-// Just pass the css shadow property, if you want a shadow on your clock.
-clockShadow: string, // clockShadow="0 0 10px grey" 
-
-
-// sets the style of clock digits, you can pass any font type you want to this prop.
-clockDigitStyle: string // clockDigitStyle="aerial"
-
 // Sets the separator between days, hours and minutes. We are using . as the default separator.
-clockSeparator: string // clockSeparator="."
+clockSeparator: string, // clockSeparator="."
+
+// Set the styles of the app, you can pass in any valid styles here.
+style: object, // style={{ color: "lightGrey" }}
 
 ```
 
