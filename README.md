@@ -94,6 +94,9 @@ clockShadow: string, // clockShadow="0 0 10px grey"
 // sets the style of clock digits, you can pass any font type you want to this prop.
 clockDigitStyle: string // clockDigitStyle="aerial"
 
+// Sets the separator between days, hours and minutes. We are using . as the default separator.
+clockSeparator: string // clockSeparator="."
+
 ```
 
 ## Contributing
