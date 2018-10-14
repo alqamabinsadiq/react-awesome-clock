@@ -104,5 +104,17 @@ style: object, // style={{ color: "lightGrey" }}
 ## License
 This source code is licensed under the MIT license.
 
----
-Made with ♥ by ALQAMA BIN SADIQ [github](https://github.com/alqamabinsadiq/react-awesome-clock)
+## Author
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/alqamabinsadiq.png?s=100" width="100">
+    </td>
+    <td>
+      Alqama Bin Sadiq<br />
+      <a href="mailto:alqamabinsadiq@gmail.com">alqamabinsadiq@gmail.com</a><br />
+      <a href="https://alqamabinsadiq.github.io/">https://alqamabinsadiq.github.io/</a>
+    </td>
+  </tr>
+</table>
