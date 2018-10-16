@@ -63,31 +63,15 @@ class App extends React.Component {
 
 ReactDOM.render(<App/>, document.body);
 ```
+
 #### `<ReactAwesomeClock>` Props:
-```js
 
-//
-// Props:
-//
-{
-// If set true then The clock will also show the day in clock.
-day: boolean, // day={true}
-
-/*
- * Sometimes we want to show the number of days passed since we start working or
- * launched a project. So this prop is helpful in such cases.
- * You can pass the object of date which contains the start date to this prop and it will 
- * calculate the number of days and display in days section of clock.
-*/
-startDate: string, // startDate="2017-06-01"
-
-// Sets the separator between days, hours and minutes. We are using . as the default separator.
-clockSeparator: string, // clockSeparator="."
-
-// Set the styles of the app, you can pass in any valid styles here.
-style: object, // style={{ color: "lightGrey" }}
-
-```
+|Prop name|Type|Description|Example values|
+|----|----|----|----|
+|day|`boolean`|Displays the day section.|`day={true}`|
+|startDate|`string`|Displays the date count from startDate.|`startDate="2017-06-01"`|
+|clockSeparator|`string`|Sets the separator between days, hours and minutes. We are using `.` as the default separator|`clockSeparator="."`|
+|style|`object`|Sets the styles of the app, you can pass in any valid styles here.|`style={{ color: "lightGrey" }}`|
 
 ## Contributing
 
