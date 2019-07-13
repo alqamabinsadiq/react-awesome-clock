@@ -1,5 +1,7 @@
 [![npm version](https://badge.fury.io/js/react-awesome-clock.svg)](https://badge.fury.io/js/react-awesome-clock)
 
+![npm](https://img.shields.io/npm/dt/react-awesome-clock.svg)
+
 # REACT AWESOME CLOCK
 
 react-awesome-clock is a react component which can be used in any one of the following ways:
